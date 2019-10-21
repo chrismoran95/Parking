@@ -1,0 +1,6 @@
+truck
+suv
+sedan
+truck
+suv
+sedan

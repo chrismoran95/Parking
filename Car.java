@@ -1,35 +1,86 @@
-import java.util.ArrayList;
+import java.sql.Timestamp;
 
 public abstract class Car {
-private ArrayList<ParkingLot> Spot = new ArrayList<ParkingLot>(); 
+//private ArrayList<ParkingLot> Spot = new ArrayList<ParkingLot>(10); 
 private int ticket;
 private boolean valid;
+private int vehiclesize;
+protected int spot;
+protected String licenseplate;
+private Timestamp timestamp;
 
-public void AddCartoSpot(ParkingLot number)//adds vehicle to certain parking spot
+Car()
 {
-	if(number.IsEmpty()&&IsValid())//if parking spot is empty and has a ticket
+	spot = 0;
+	ticket=0;
+	valid=false;
+	this.timestamp = new Timestamp(System.currentTimeMillis());
+
+}
+Car(int spot,int vehiclesize, String licenseplate,int ticket,boolean valid)
+{
+	this.spot=spot;
+	this.vehiclesize=vehiclesize;
+	this.licenseplate=licenseplate;
+	this.ticket=ticket;
+	this.valid=valid;
+	
+	this.timestamp = new Timestamp(System.currentTimeMillis());
+}
+public void SetSize(int n)
+{
+	vehiclesize=n;//sets vehicle size
+}
+public boolean IsASedan()
+{
+	if(vehiclesize==1)
 	{
-	Spot.add(number);//adds car to certain spot number
+		return true;
 	}
 	else
 	{
-		System.out.println("Parking spot isn't empty");
+		return false;
+	}
+}
+public boolean IsATruck()
+{
+	if(vehiclesize==3)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 
+public boolean IsASuv()//check if it is an suv
+{
+	if(vehiclesize==2)//if the vehicle size is 2 then it is 
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+public void AddCartoSpot(int spot)//adds vehicle to certain parking spot
+{
+	this.spot=spot;
+}
+public int GetSpot()
+{
+	return spot;
+}
 public int getTicket()
 {
 	return ticket;
 }
-public void CreateTicket(ParkingLot number)
-{
-	
-	ticket=number.GetSpot();//creates the tickets//so when we customer is at entrance it will check to see if parking spot matches ticket
-	valid = true;
-}
+
 public boolean IsValid() {//checks if ticket is valid
 	
-	return valid=true;
+	return valid==true;
 }
   
 }
