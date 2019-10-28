@@ -17,12 +17,12 @@ Car()
 	this.timestamp = new Timestamp(System.currentTimeMillis());
 
 }
-Car(int spot,int vehiclesize, String licenseplate,int ticket,boolean valid)
+Car(int spot,int vehiclesize, String licenseplate,boolean valid)
 {
 	this.spot=spot;
 	this.vehiclesize=vehiclesize;
 	this.licenseplate=licenseplate;
-	this.ticket=ticket;
+	//this.ticket=ticket;
 	this.valid=valid;
 	
 	this.timestamp = new Timestamp(System.currentTimeMillis());

@@ -22,43 +22,56 @@ ParkingLot()
  this.ticketNumber = 0;
 
 }
-ParkingLot(Car vehicle,int level,int spotnumber,int spotsize)
+ParkingLot(int level,int spotnumber,int spotsize)
 {
 	this.spotnumber=spotnumber;
-    ParkVehicle.add(vehicle);//adds vehicle to an arraylist
+    //ParkVehicle.add(vehicle);//adds vehicle to an arraylist
 	this.level=level;
 	this.spotnumber=spotnumber;
 	this.spotsize=spotsize;
-	 this.ticketNumber = 0;
+	this.ticketNumber = 0;
 }
 public void AddCarSpot(Car vehicle)//add vehicle to parking spot
 {
-	if(IsEmpty())
+	if(IsEmpty()&& LotEmpty())
 	{
 	 spotnumber=ticketNumber++;
-     ParkVehicle.add(vehicle);//adds vehicle to spot number
+     ParkVehicle.add(vehicle);//adds vehicle to spot number in an arraylist
      
 	}
 	else
 	{
-		System.out.println("Parking lot is full");
+		System.out.println("Parking spot is full");
 	}
 }
-
-public void remove() {
+public int GetTicket()
+{
+	return spotnumber;
+}
+public void remove() 
+{
 	if (ParkVehicle.size() == 0)
+	{
+		
 		return;
+	}
+	 Car c = ParkVehicle.get(0);//removes the first array
+	 ParkVehicle.remove(0);//removes the first array
 	
-	Car c = ParkVehicle.get(0);
-	ParkVehicle.remove(0);
-	
-	double multiplier = 1.0;
+	double multiplier=0.0;
 	if (c instanceof SUV)
+	{
 		multiplier = 1.5;
+	}
 	else if (c instanceof Truck)
+	{
 		multiplier = 1.75;
-	
-	SetPrice(money + 10 * multiplier);
+	}
+	else if (c instanceof Sedan)
+	{
+		multiplier = 1.25;
+	}
+	SetPrice(money + (10 * multiplier));
 }
 
 public void SetPrice(double money)
@@ -78,9 +91,20 @@ public int SetSpot(int n)
 	spotnumber=n;
 	return spotnumber;
 }
+public boolean LotEmpty()
+{
+	if(spotnumber < maxSize)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 public boolean IsEmpty()
 {
-if(vehicle==null)//if there isn't a vehicle then spot is empty
+if(vehicle == null)//if there isn't a vehicle then spot is empty
 {
 	return true;
 }
